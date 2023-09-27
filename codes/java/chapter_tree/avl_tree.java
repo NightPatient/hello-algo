@@ -27,8 +27,9 @@ class AVLTree {
     /* 获取平衡因子 */
     public int balanceFactor(TreeNode node) {
         // 空节点平衡因子为 0
-        if (node == null)
+        if (node == null) {
             return 0;
+        }
         // 节点平衡因子 = 左子树高度 - 右子树高度
         return height(node.left) - height(node.right);
     }
@@ -98,15 +99,17 @@ class AVLTree {
 
     /* 递归插入节点（辅助方法） */
     private TreeNode insertHelper(TreeNode node, int val) {
-        if (node == null)
+        if (node == null) {
             return new TreeNode(val);
+        }
         /* 1. 查找插入位置，并插入节点 */
-        if (val < node.val)
+        if (val < node.val) {
             node.left = insertHelper(node.left, val);
-        else if (val > node.val)
+        } else if (val > node.val) {
             node.right = insertHelper(node.right, val);
-        else
+        } else {
             return node; // 重复节点不插入，直接返回
+        }
         updateHeight(node); // 更新节点高度
         /* 2. 执行旋转操作，使该子树重新恢复平衡 */
         node = rotate(node);
@@ -121,22 +124,25 @@ class AVLTree {
 
     /* 递归删除节点（辅助方法） */
     private TreeNode removeHelper(TreeNode node, int val) {
-        if (node == null)
+        if (node == null) {
             return null;
+        }
         /* 1. 查找节点，并删除之 */
-        if (val < node.val)
+        if (val < node.val) {
             node.left = removeHelper(node.left, val);
-        else if (val > node.val)
+        } else if (val > node.val) {
             node.right = removeHelper(node.right, val);
-        else {
+        } else {
             if (node.left == null || node.right == null) {
                 TreeNode child = node.left != null ? node.left : node.right;
                 // 子节点数量 = 0 ，直接删除 node 并返回
-                if (child == null)
+                if (child == null) {
                     return null;
+                }
                 // 子节点数量 = 1 ，直接删除 node
-                else
+                else {
                     node = child;
+                }
             } else {
                 // 子节点数量 = 2 ，则将中序遍历的下个节点删除，并用该节点替换当前节点
                 TreeNode temp = node.right;
@@ -160,14 +166,17 @@ class AVLTree {
         // 循环查找，越过叶节点后跳出
         while (cur != null) {
             // 目标节点在 cur 的右子树中
-            if (cur.val < val)
+            if (cur.val < val) {
                 cur = cur.right;
+            }
             // 目标节点在 cur 的左子树中
-            else if (cur.val > val)
+            else if (cur.val > val) {
                 cur = cur.left;
+            }
             // 找到目标节点，跳出循环
-            else
+            else {
                 break;
+            }
         }
         // 返回目标节点
         return cur;

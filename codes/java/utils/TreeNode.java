@@ -54,8 +54,9 @@ public class TreeNode {
 
     /* 将二叉树序列化为列表：递归 */
     private static void treeToListDFS(TreeNode root, int i, List<Integer> res) {
-        if (root == null)
+        if (root == null) {
             return;
+        }
         while (i >= res.size()) {
             res.add(null);
         }

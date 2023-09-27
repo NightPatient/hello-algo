@@ -26,8 +26,9 @@ class ArrayBinaryTree {
     /* 获取索引为 i 节点的值 */
     public Integer val(int i) {
         // 若索引越界，则返回 null ，代表空位
-        if (i < 0 || i >= size())
+        if (i < 0 || i >= size()) {
             return null;
+        }
         return tree.get(i);
     }
 
@@ -51,8 +52,9 @@ class ArrayBinaryTree {
         List<Integer> res = new ArrayList<>();
         // 直接遍历数组
         for (int i = 0; i < size(); i++) {
-            if (val(i) != null)
+            if (val(i) != null) {
                 res.add(val(i));
+            }
         }
         return res;
     }
@@ -60,19 +62,23 @@ class ArrayBinaryTree {
     /* 深度优先遍历 */
     private void dfs(Integer i, String order, List<Integer> res) {
         // 若为空位，则返回
-        if (val(i) == null)
+        if (val(i) == null) {
             return;
+        }
         // 前序遍历
-        if (order == "pre")
+        if (order == "pre") {
             res.add(val(i));
+        }
         dfs(left(i), order, res);
         // 中序遍历
-        if (order == "in")
+        if (order == "in") {
             res.add(val(i));
+        }
         dfs(right(i), order, res);
         // 后序遍历
-        if (order == "post")
+        if (order == "post") {
             res.add(val(i));
+        }
     }
 
     /* 前序遍历 */
